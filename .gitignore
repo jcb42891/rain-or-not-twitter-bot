@@ -24,9 +24,16 @@ var/
 .installed.cfg
 *.egg
 
+# Virtual Environment
+venv/
+.venv/
+ENV/
+
 # Deployment
 deployment.zip
 package/
+dummy.zip
+dummy.py
 
 # Logs
 *.log

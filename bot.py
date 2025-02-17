@@ -95,5 +95,20 @@ def main():
         logger.error(f"Bot execution failed: {str(e)}")
         raise
 
+def lambda_handler(event, context):
+    """AWS Lambda handler"""
+    try:
+        main()
+        return {
+            'statusCode': 200,
+            'body': 'Tweet posted successfully'
+        }
+    except Exception as e:
+        logger.error(f"Lambda execution failed: {str(e)}")
+        return {
+            'statusCode': 500,
+            'body': str(e)
+        }
+
 if __name__ == "__main__":
-    main() 
+    lambda_handler(None, None) 
