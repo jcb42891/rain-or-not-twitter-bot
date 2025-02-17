@@ -86,7 +86,7 @@ def main():
         location = f"{weather_data['location']['name']}, {weather_data['location']['region']}"
         
         # Create tweet message with website link
-        message = f"{'☔' if is_raining else '☀️'} It's {'' if is_raining else 'not '}raining in {location} today.\n\nrainornot.com will tell you if it's raining in your area.\n\n Or if it's not."
+        message = f"{'☔' if is_raining else '☀️'} It's {'' if is_raining else 'not '}raining in {location} today.\n\nrainornot.com will tell you if it's raining in your area.\n\nOr if it's not."
         
         # Post tweet
         post_tweet(message)
