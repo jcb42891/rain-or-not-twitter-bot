@@ -1,0 +1,11 @@
+{
+    "Name": "RainOrNotTwitterBotSchedule",
+    "ScheduleExpression": "cron(0 12 * * ? *)",
+    "State": "ENABLED",
+    "Description": "Triggers the Rain-or-Not Twitter bot daily at 8 AM EST (12 PM UTC)",
+    "Targets": [{
+        "Id": "RainOrNotTwitterBotTarget",
+        "Arn": "YOUR_LAMBDA_FUNCTION_ARN",
+        "Input": "{}"
+    }]
+} 

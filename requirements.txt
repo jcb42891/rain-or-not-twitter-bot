@@ -1,0 +1,4 @@
+python-dotenv>=1.0.0
+tweepy>=4.12.0
+requests>=2.26.0
+boto3>=1.26.0 
