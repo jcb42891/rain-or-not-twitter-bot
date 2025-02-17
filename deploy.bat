@@ -1,30 +1,35 @@
 @echo off
 echo Creating deployment package...
 
-:: Create and activate a temporary virtual environment
+:: Create a temporary directory for the deployment package
+mkdir deployment-package
+cd deployment-package
+
+:: Create and activate a virtual environment
 python -m venv venv
 call venv\Scripts\activate
 
-:: Create package directory and install dependencies
-mkdir package
-pip install -r requirements.txt --target ./package
+:: Install dependencies
+pip install -r ..\requirements.txt
 
-:: Create deployment zip
-cd package
-powershell Compress-Archive -Path * -DestinationPath ..\deployment.zip -Force
-cd ..
+:: Copy the dependencies to a lib folder
+mkdir python
+xcopy /E /H /C /I venv\Lib\site-packages\* python\
 
-:: Add bot.py and cities.json to the zip
-powershell Compress-Archive -Path bot.py, cities.json -DestinationPath deployment.zip -Update
+:: Copy your bot code
+copy ..\bot.py python\
+copy ..\cities.json python\
 
-:: Deploy to AWS Lambda
-aws lambda update-function-code --function-name rain-or-not-twitter-bot --zip-file fileb://deployment.zip
+:: Create the deployment zip
+powershell Compress-Archive -Path python\* -DestinationPath ..\deployment.zip -Force
 
 :: Clean up
-deactivate
-rmdir /s /q package
-rmdir /s /q venv
-del deployment.zip
+cd ..
+rmdir /s /q deployment-package
+
+:: Deploy to AWS Lambda
+echo Deploying to AWS Lambda...
+aws lambda update-function-code --function-name rain-or-not-twitter-bot --zip-file fileb://deployment.zip
 
 echo Deployment complete!
 pause 
