@@ -42,4 +42,6 @@ dummy.py
 .idea/
 .vscode/
 *.swp
-*.swo 
+*.swo
+
+twitter-bot-instructions.md
