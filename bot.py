@@ -80,7 +80,7 @@ def main():
         
         # Check if it's raining
         condition = weather_data['current']['condition']['text'].lower()
-        is_raining = any(word in condition for word in ['rain', 'drizzle', 'shower'])
+        is_raining = any(word in condition for word in ['rain', 'drizzle', 'shower', 'sleet', 'mist'])
         
         # Format location
         location = f"{weather_data['location']['name']}, {weather_data['location']['region']}"
